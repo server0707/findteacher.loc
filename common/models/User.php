@@ -46,6 +46,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             TimestampBehavior::className(),
+            'image' => [
+                'class' => 'rico\yii2images\behaviors\ImageBehave',
+            ],
         ];
     }
 
