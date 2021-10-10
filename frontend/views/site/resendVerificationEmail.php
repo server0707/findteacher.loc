@@ -1,10 +1,10 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
+/* @var $form yii\bootstrap5\ActiveForm */
 /* @var $model \frontend\models\ResetPasswordForm */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Resend verification email';
 $this->params['breadcrumbs'][] = $this->title;
