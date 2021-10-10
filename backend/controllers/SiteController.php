@@ -77,8 +77,17 @@ class SiteController extends Controller
         $this->layout = 'blank';
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->loginToAdmin()){
+                return $this->goBack();
+            }else{
+                $model->addError('password',Yii::t('app','Incorrect username or password.'));
+                $model->password = '';
+
+                return $this->render('login', [
+                    'model' => $model,
+                ]);
+            }
         } else {
             $model->password = '';
 
