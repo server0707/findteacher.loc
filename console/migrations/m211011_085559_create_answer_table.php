@@ -8,7 +8,7 @@ use yii\db\Migration;
  *
  * - `{{%question}}`
  */
-class m211010_123057_create_answer_table extends Migration
+class m211011_085559_create_answer_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class m211010_123057_create_answer_table extends Migration
         $this->createTable('{{%answer}}', [
             'id' => $this->primaryKey(),
             'question_id' => $this->integer()->notNull(),
-            'text_uz' => $this->string(255),
-            'text_ru' => $this->string(255),
+            'text_uz' => $this->text(),
+            'text_ru' => $this->text(),
             'correct' => $this->boolean()->defaultValue(false),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
