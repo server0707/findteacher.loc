@@ -27,6 +27,7 @@ class m211010_120007_create_lesson_table extends Migration
             'description_ru' => $this->string(255),
             'viewed' => $this->bigInteger(),
             'price' => $this->string(255),
+            'old_price' => $this->string(255),
             'link_of_lesson_video' => $this->string(255),
             'student_count' => $this->integer(),
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
