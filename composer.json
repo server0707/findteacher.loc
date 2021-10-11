@@ -21,7 +21,8 @@
         "2amigos/yii2-tinymce-widget": "~1.1",
         "kartik-v/yii2-widget-fileinput": "@dev",
         "2amigos/yii2-selectize-widget": "~1.0",
-        "costa-rico/yii2-images": "^1.0"
+        "costa-rico/yii2-images": "^1.0",
+        "hail812/yii2-adminlte3": "~1.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

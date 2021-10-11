@@ -3,14 +3,13 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use backend\assets\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
-use yii\bootstrap5\Breadcrumbs;
-use common\widgets\Alert;
 
-AppAsset::register($this);
+\hail812\adminlte3\assets\FontAwesomeAsset::register($this);
+\hail812\adminlte3\assets\AdminLteAsset::register($this);
+$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+
+$assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -23,56 +22,28 @@ AppAsset::register($this);
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="hold-transition sidebar-mini">
 <?php $this->beginBody() ?>
 
-<div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav ms-auto'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+<div class="wrapper">
+    <!-- Navbar -->
+    <?= $this->render('navbar', ['assetDir' => $assetDir]) ?>
+    <!-- /.navbar -->
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+    <!-- Main Sidebar Container -->
+    <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
+
+    <!-- Content Wrapper. Contains page content -->
+    <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
+    <!-- /.content-wrapper -->
+
+    <!-- Control Sidebar -->
+    <?= $this->render('control-sidebar') ?>
+    <!-- /.control-sidebar -->
+
+    <!-- Main Footer -->
+    <?= $this->render('footer') ?>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-
-        <p class="float-end"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>
