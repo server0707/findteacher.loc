@@ -1,5 +1,8 @@
 <?php
 return [
+    'name' => 'FindTeacherSystem',
+    'language'=>'uz',
+    'timeZone' => 'Asia/Tashkent',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
