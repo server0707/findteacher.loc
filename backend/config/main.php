@@ -18,11 +18,11 @@ return [
             'baseUrl' => '/admin',
         ],
         'view' => [
-            'theme' => [
-                'pathMap' => [
-                    '@app/views' => '@vendor/hail812/yii2-adminlte3/src/views'
-                ],
-            ],
+//            'theme' => [
+//                'pathMap' => [
+//                    '@app/views' => '@vendor/hail812/yii2-adminlte3/src/views'
+//                ],
+//            ],
         ],
         'user' => [
             'identityClass' => 'common\models\User',

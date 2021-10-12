@@ -12,6 +12,15 @@ return [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'i18n'=>[
+            'translations'=>[
+                'yii'=>[
+                    'class'=>'yii\i18n\PhpMessageSource',
+                    'basePath' => '@common/messages',
+                    'sourceLanguage'=>'en'
+                ]
+            ]
+        ],
     ],
     'modules' => [
         'yii2images' => [
