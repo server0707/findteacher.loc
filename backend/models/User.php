@@ -21,6 +21,7 @@ use Yii;
  * @property string|null $lastName
  * @property string|null $fatherName
  * @property string|null $phone
+ * @property int|null $sex
  * @property string $role
  *
  * @property ExamSolutionHistory[] $examSolutionHistories
@@ -44,7 +45,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['status', 'created_at', 'updated_at', 'sex'], 'integer'],
             [['role'], 'string'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstName', 'lastName', 'fatherName', 'phone'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
@@ -74,6 +75,7 @@ class User extends \yii\db\ActiveRecord
             'lastName' => Yii::t('yii', 'Last Name'),
             'fatherName' => Yii::t('yii', 'Father Name'),
             'phone' => Yii::t('yii', 'Phone'),
+            'sex' => Yii::t('yii', 'Sex'),
             'role' => Yii::t('yii', 'Role'),
         ];
     }
