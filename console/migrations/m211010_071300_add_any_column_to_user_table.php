@@ -16,6 +16,7 @@ class m211010_071300_add_any_column_to_user_table extends Migration
         $this->addColumn('{{%user}}', 'lastName', $this->string(255));
         $this->addColumn('{{%user}}', 'fatherName', $this->string(255));
         $this->addColumn('{{%user}}', 'phone', $this->string(255));
+        $this->addColumn('{{%user}}', 'sex', $this->smallInteger());
         $this->addColumn('{{%user}}', 'role', "ENUM('admin','teacher','student') NOT NULL DEFAULT 'student'");
     }
 
@@ -28,6 +29,7 @@ class m211010_071300_add_any_column_to_user_table extends Migration
         $this->dropColumn('{{%user}}', 'lastName');
         $this->dropColumn('{{%user}}', 'fatherName');
         $this->dropColumn('{{%user}}', 'phone');
+        $this->dropColumn('{{%user}}', 'sex');
         $this->dropColumn('{{%user}}', 'role');
     }
 }
