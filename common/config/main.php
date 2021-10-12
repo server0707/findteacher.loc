@@ -1,26 +1,33 @@
 <?php
 return [
     'name' => 'FindTeacherSystem',
-    'language'=>'uz',
+    'language' => 'uz',
     'timeZone' => 'Asia/Tashkent',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
-        'i18n'=>[
-            'translations'=>[
-                'yii'=>[
-                    'class'=>'yii\i18n\PhpMessageSource',
+        'i18n' => [
+            'translations' => [
+                'yii' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@common/messages',
-                    'sourceLanguage'=>'en'
+                    'sourceLanguage' => 'en'
                 ]
             ]
         ],
+        // Override the urlManager component
+        'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+            'languages' => ['ru', 'uz'],
+            'enableDefaultLanguageUrlCode' => true,
+            'enableLanguageDetection' => false,
+        ]
     ],
     'modules' => [
         'yii2images' => [

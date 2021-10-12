@@ -40,6 +40,9 @@ AppAsset::register($this);
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
     ];
+
+    $menuItems[] = \common\widgets\LanguageChanger::widget(['classOfButton' => 'naw-link bg-transparent btn btn-outline-light']);
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

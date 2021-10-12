@@ -22,7 +22,8 @@
         "kartik-v/yii2-widget-fileinput": "@dev",
         "2amigos/yii2-selectize-widget": "~1.0",
         "costa-rico/yii2-images": "^1.0",
-        "hail812/yii2-adminlte3": "~1.1"
+        "hail812/yii2-adminlte3": "~1.1",
+        "codemix/yii2-localeurls": "^1.7"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
