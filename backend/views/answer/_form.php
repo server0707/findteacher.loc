@@ -14,9 +14,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'question_id')->textInput() ?>
 
-    <?= $form->field($model, 'text_uz')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'text_uz')->widget(\dosamigos\tinymce\TinyMce::className()) ?>
+<!--    --><?//= $form->field($model, 'text_uz')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'text_ru')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'text_ru')->widget(\dosamigos\tinymce\TinyMce::className());?>
+<!--    --><?//= $form->field($model, 'text_ru')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'correct')->textInput() ?>
 
