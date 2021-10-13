@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "lesson".
@@ -31,6 +34,25 @@ use Yii;
  */
 class Lesson extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -45,7 +67,7 @@ class Lesson extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'subject_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['user_id', 'subject_id', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['about_uz', 'about_ru', 'keywords'], 'string'],
             [['description_uz', 'description_ru', 'price', 'old_price', 'link_of_lesson_video'], 'string', 'max' => 255],

@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "answer".
@@ -21,6 +24,25 @@ use Yii;
  */
 class Answer extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -35,7 +57,7 @@ class Answer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['question_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['question_id', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['question_id', 'correct', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['text_uz', 'text_ru'], 'string'],
             [['question_id'], 'exist', 'skipOnError' => true, 'targetClass' => Question::className(), 'targetAttribute' => ['question_id' => 'id']],

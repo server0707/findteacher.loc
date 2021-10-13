@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "keyword".
@@ -16,6 +19,25 @@ use Yii;
  */
 class Keyword extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -30,7 +52,7 @@ class Keyword extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['name', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],

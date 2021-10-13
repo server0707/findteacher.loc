@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "theme".
@@ -21,6 +24,25 @@ use Yii;
  */
 class Theme extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -35,7 +57,7 @@ class Theme extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subject_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['subject_id', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['subject_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['name_uz', 'name_ru'], 'string', 'max' => 255],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subject::className(), 'targetAttribute' => ['subject_id' => 'id']],

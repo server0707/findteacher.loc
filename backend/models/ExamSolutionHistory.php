@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "exam_solution_history".
@@ -23,6 +26,25 @@ use Yii;
  */
 class ExamSolutionHistory extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -37,7 +59,7 @@ class ExamSolutionHistory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['exam_id', 'user_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['exam_id', 'user_id', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['exam_id', 'user_id', 'total_questions_count', 'correct_answers_count', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['answers_list'], 'string'],
             [['exam_id'], 'exist', 'skipOnError' => true, 'targetClass' => Exam::className(), 'targetAttribute' => ['exam_id' => 'id']],

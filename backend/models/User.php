@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "user".
@@ -30,6 +33,20 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -44,7 +61,7 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'auth_key', 'password_hash', 'email', 'created_at', 'updated_at'], 'required'],
+            [['username', 'auth_key', 'password_hash', 'email', /*'created_at', 'updated_at'*/], 'required'],
             [['status', 'created_at', 'updated_at', 'sex'], 'integer'],
             [['role'], 'string'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstName', 'lastName', 'fatherName', 'phone'], 'string', 'max' => 255],

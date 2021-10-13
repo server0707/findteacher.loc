@@ -3,6 +3,9 @@
 namespace backend\models;
 
 use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "subject".
@@ -29,6 +32,25 @@ use Yii;
  */
 class Subject extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::class,
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // if you're using datetime instead of UNIX timestamp:
+                // 'value' => new Expression('NOW()'),
+            ],
+            [
+                'class' => BlameableBehavior::class,
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -43,7 +65,7 @@ class Subject extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course_id', 'name_uz', 'name_ru', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['course_id', 'name_uz', 'name_ru', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['course_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['about_uz', 'about_ru', 'keywords'], 'string'],
             [['name_uz', 'name_ru', 'description_uz', 'description_ru'], 'string', 'max' => 255],
