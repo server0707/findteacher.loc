@@ -6,7 +6,7 @@ use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
-use yii\web\Controller;
+use common\controllers\AbdullaController;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
@@ -18,7 +18,7 @@ use frontend\models\ContactForm;
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends AbdullaController
 {
     /**
      * {@inheritdoc}
@@ -74,6 +74,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $this->setMeta('Home - '.Yii::$app->name);
+
         return $this->render('index');
     }
 
@@ -84,6 +86,8 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        $this->setMeta('Login - '.Yii::$app->name);
+
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
@@ -119,6 +123,8 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
+        $this->setMeta('Contact - '.Yii::$app->name);
+
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
@@ -142,6 +148,8 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
+        $this->setMeta('About - '.Yii::$app->name);
+
         return $this->render('about');
     }
 
@@ -152,6 +160,8 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
+        $this->setMeta('SignUp - '.Yii::$app->name);
+
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
@@ -170,6 +180,8 @@ class SiteController extends Controller
      */
     public function actionRequestPasswordReset()
     {
+        $this->setMeta('Request password reset - '.Yii::$app->name);
+
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -195,6 +207,8 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
+        $this->setMeta('Reset password - '.Yii::$app->name);
+
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidArgumentException $e) {
@@ -221,6 +235,8 @@ class SiteController extends Controller
      */
     public function actionVerifyEmail($token)
     {
+        $this->setMeta('Verify email - '.Yii::$app->name);
+
         try {
             $model = new VerifyEmailForm($token);
         } catch (InvalidArgumentException $e) {
@@ -244,6 +260,8 @@ class SiteController extends Controller
      */
     public function actionResendVerificationEmail()
     {
+        $this->setMeta('Resend verification email - '.Yii::$app->name);
+
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -256,5 +274,11 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionCourses(){
+        $this->setMeta('Courses - '.Yii::$app->name);
+
+        return $this->render('courses');
     }
 }
