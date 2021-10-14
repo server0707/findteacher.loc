@@ -176,7 +176,7 @@ use yii\helpers\Html;
         <li class="nav-item">
             <?= Html::a('<i class="fas fa-sign-out-alt"></i>', ['/site/logout'], ['data-method' => 'post', 'class' => 'nav-link']) ?>
         </li>
-        <li class="nav-item"><?=\common\widgets\LanguageChangerBackend::widget()?></li>
+        <li class="nav-item"><?=\common\widgets\LanguageChangerBootstrap4::widget()?></li>
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
