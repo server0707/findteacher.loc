@@ -7,7 +7,7 @@ namespace common\widgets;
 use Yii;
 use yii\bootstrap5\Widget;
 
-class LanguageChanger extends Widget
+class LanguageChangerBootstrap5 extends Widget
 {
     public $classOfButton;
 
@@ -23,10 +23,10 @@ class LanguageChanger extends Widget
         $currLang = Yii::$app->language;
         $dropdown =
             '<div class="dropdown">' .
-                '<button class="nav-link ' . $this->classOfButton . ' dropdown-toggle" type="button" id="LanguageChanger" data-bs-toggle="dropdown" aria-expanded="false">' .
+                '<button class="nav-link ' . $this->classOfButton . ' dropdown-toggle" type="button" id="LanguageChangerBootstrap5" data-bs-toggle="dropdown" aria-expanded="false">' .
                     Yii::$app->params['languages'][$currLang] .
                 '</button>' .
-            '<ul class="dropdown-menu" aria-labelledby="LanguageChanger">';
+            '<ul class="dropdown-menu" aria-labelledby="LanguageChangerBootstrap5">';
         foreach (Yii::$app->params['languages'] as $key => $language) {
             $dropdown .=
                 '<li>' .
