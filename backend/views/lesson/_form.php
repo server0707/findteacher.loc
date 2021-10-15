@@ -46,6 +46,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'updated_by')->textInput() ?>
 
+    <?= $form->field($model, 'duration')->textInput() ?>
+
     <?= $form->field($model, 'start_time')->textInput() ?>
 
     <?= $form->field($model, 'finish_time')->textInput() ?>

@@ -79,7 +79,7 @@ $this->registerJs('$(".custom-select").on(\'input\', function () {
                                     <div class="course-meta mt-4">
                                         <div class="meta-item course-lesson">
                                             <span class="fa fa-clock-o"></span>
-                                            <span class="meta-value"> 20 hrs </span>
+                                            <span class="meta-value"> <?=(!empty($lesson->duration)) ? $lesson->duration : ' - '?> </span>
                                         </div>
                                         <div class="meta-item course-">
                                             <span class="fa fa-user-o"></span>

@@ -15,6 +15,7 @@ class m211015_100316_add_any_columns_to_lesson_table extends Migration
      */
     public function safeUp()
     {
+        $this->addColumn('{{%lesson}}', 'duration', $this->string());
         $this->addColumn('{{%lesson}}', 'start_time', $this->time());
         $this->addColumn('{{%lesson}}', 'finish_time', $this->time());
         $this->addColumn('{{%lesson}}', 'address', $this->text());
@@ -43,6 +44,7 @@ class m211015_100316_add_any_columns_to_lesson_table extends Migration
      */
     public function safeDown()
     {
+        $this->dropColumn('{{%lesson}}', 'duration');
         $this->dropColumn('{{%lesson}}', 'start_time');
         $this->dropColumn('{{%lesson}}', 'finish_time');
         $this->dropColumn('{{%lesson}}', 'address');

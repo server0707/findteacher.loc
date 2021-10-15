@@ -28,6 +28,7 @@ use yii\db\ActiveRecord;
  * @property int $updated_at
  * @property int $created_by
  * @property int $updated_by
+ * @property string|null $duration
  * @property string|null $start_time
  * @property string|null $finish_time
  * @property string|null $address
@@ -74,7 +75,7 @@ class Lesson extends \yii\db\ActiveRecord
         return [
             [['user_id', 'subject_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
             [['user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'region_id'], 'integer'],
-            [['about_uz', 'about_ru', 'keywords', 'address'], 'string'],
+            [['about_uz', 'about_ru', 'keywords', 'address', 'duration'], 'string'],
             [['start_time', 'finish_time'], 'safe'],
             [['description_uz', 'description_ru', 'price', 'old_price', 'link_of_lesson_video'], 'string', 'max' => 255],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
@@ -107,6 +108,7 @@ class Lesson extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('yii', 'Updated At'),
             'created_by' => Yii::t('yii', 'Created By'),
             'updated_by' => Yii::t('yii', 'Updated By'),
+            'duration' => Yii::t('yii', 'Duration'),
             'start_time' => Yii::t('yii', 'Start Time'),
             'finish_time' => Yii::t('yii', 'Finish Time'),
             'address' => Yii::t('yii', 'Address'),

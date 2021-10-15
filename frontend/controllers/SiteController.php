@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use common\controllers\AbdullaController;
@@ -303,9 +304,9 @@ class SiteController extends AbdullaController
 
     public function actionSubjects(int $course_id = null, string $course_name = null)
     {
-        $course = Course::findOne($course_id);
+        $course = Course::findOne(['id' => $course_id, 'status' => Course::STATUS_ACTIVE]);
         if ($course_name !== null)
-            $course = Course::findOne(['name_' . Yii::$app->language => $course_name]);
+            $course = Course::findOne(['name_' . Yii::$app->language => $course_name, 'status' => Course::STATUS_ACTIVE]);
 
         $this->setMeta(Yii::t('yii', 'Subjects') . ' - ' . Yii::t('yii', $course['name_' . Yii::$app->language]) . Yii::$app->name);
 
@@ -324,9 +325,9 @@ class SiteController extends AbdullaController
 
     public function actionLessons(int $subject_id = null, string $subject_name = null)
     {
-        $subject = Subject::findOne($subject_id);
+        $subject = Subject::findOne(['id' => $subject_id, 'status' => Subject::STATUS_ACTIVE]);
         if ($subject_name !== null)
-            $subject = Subject::findOne(['name_' . Yii::$app->language => $subject_name]);
+            $subject = Subject::findOne(['name_' . Yii::$app->language => $subject_name, 'status' => Subject::STATUS_ACTIVE]);
 
         $this->setMeta(Yii::t('yii', 'Lessons') . ' / ' . Yii::t('yii', $subject['name_' . Yii::$app->language]) . ' - ' . Yii::$app->name);
 
