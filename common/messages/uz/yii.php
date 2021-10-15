@@ -151,5 +151,5 @@ return [
     'Body' => 'Habar matni',
     'Your message has been sent successfully!' => 'Habaringiz muvaffaqiyatli jo\'natildi!',
     'Created' => 'Yaratilgan',
-
+    'Users' => 'Foydalanuvchilar',
 ];

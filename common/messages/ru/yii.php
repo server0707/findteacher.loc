@@ -172,4 +172,5 @@ return [
     'Body' => 'Текст сообщения',
     'Your message has been sent successfully!' => 'Ваше сообщение было отправлено успешно!',
     'Created' => 'Создано',
+    'Users' => 'Пользователи',
 ];
