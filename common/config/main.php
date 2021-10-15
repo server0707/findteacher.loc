@@ -1,6 +1,6 @@
 <?php
 return [
-    'name' => 'FindTeacherSystem',
+    'name' => 'Teacher Finding System',
     'language' => 'uz',
     'timeZone' => 'Asia/Tashkent',
     'aliases' => [
