@@ -110,6 +110,7 @@ $this->registerJs('$(window).on("scroll", function () {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link rel="icon" href="/favicon.ico">
     <?php $this->head() ?>
 </head>
 <body>
@@ -121,7 +122,8 @@ $this->registerJs('$(window).on("scroll", function () {
         <nav class="navbar navbar-expand-lg navbar-dark stroke">
             <h1>
                 <a class="navbar-brand" href="<?= Yii::$app->homeUrl ?>">
-                    <span class="fa fa-diamond"></span>Study Course <span class="logo">Journey to success</span></a>
+                    <img src="/favicon.ico" alt="icon of website" width="40px">TFS <span
+                            class="logo"><?= Yii::$app->name ?></span></a>
             </h1>
 
             <!-- if logo is image enable this
@@ -149,6 +151,9 @@ $this->registerJs('$(window).on("scroll", function () {
                     <li class="nav-item <?= (Yii::$app->controller->action->id == 'contact') ? 'active' : '@@contact__active' ?>">
                         <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/contact']) ?>">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <?= \common\widgets\LanguageChangerBootstrap4::widget() ?>
+                    </li>
                 </ul>
 
                 <!--/search-right-->
@@ -171,7 +176,7 @@ $this->registerJs('$(window).on("scroll", function () {
                     <!-- /search popup -->
                 </div>
 
-<!--                Login button-->
+                <!--                Login button-->
                 <?php if (Yii::$app->user->isGuest): ?>
                     <div class="top-quote mr-lg-2 text-center">
                         <a href="<?= \yii\helpers\Url::toRoute(['site/login']) ?>" class="btn login mr-2"><span
@@ -179,8 +184,9 @@ $this->registerJs('$(window).on("scroll", function () {
                     </div>
                 <?php else: ?>
                     <div class="top-quote mr-lg-2 text-center">
-                        <a href="<?= \yii\helpers\Url::toRoute(['site/logout']) ?>" data-method="post" class="btn login mr-2"><span
-                                    class="fa fa-user"></span> logout(<?=Yii::$app->user->identity->username?>)</a>
+                        <a href="<?= \yii\helpers\Url::toRoute(['site/logout']) ?>" data-method="post"
+                           class="btn login mr-2"><span
+                                    class="fa fa-user"></span> logout(<?= Yii::$app->user->identity->username ?>)</a>
                     </div>
                 <?php endif; ?>
             </div>
@@ -209,11 +215,17 @@ $this->registerJs('$(window).on("scroll", function () {
     <section class="w3l-breadcrumb">
         <div class="breadcrumb-bg breadcrumb-bg-about py-5">
             <div class="container pt-lg-5 pt-3 p-lg-4 pb-3">
-                <h2 class="title mt-5 pt-lg-5 pt-sm-3"><span class="text-capitalize"><?= Yii::$app->controller->action->id ?></span></h2>
+                <h2 class="title mt-5 pt-lg-5 pt-sm-3"><span
+                            class="text-capitalize"><?= Yii::$app->controller->action->id ?></span></h2>
                 <ul class="breadcrumbs-custom-path pb-sm-5 pb-4 mt-2 text-center mb-5">
-                    <li><a href="<?= Yii::$app->homeUrl ?>">Home</a></li>
-                    <li class="active"> / <span class="text-capitalize"><?= Yii::$app->controller->action->id ?></span>
-                    </li>
+                    <li><a href="<?= Yii::$app->homeUrl ?>"><?= Yii::t('yii', 'Home') ?></a></li>
+                    <?php if (Yii::$app->controller->action->id == 'subjects') : ?>
+                        <li> /
+                            <a href="<?= \yii\helpers\Url::to(['courses']) ?>"><?= Yii::t('yii', 'Courses') ?></a>
+                        </li>
+                    <?php endif; ?>
+                    <li class="active">
+                        / <?= Yii::t('yii', '<span class="text-capitalize">' . Yii::$app->controller->action->id . '</span>') ?></li>
                 </ul>
             </div>
         </div>
@@ -229,7 +241,9 @@ $this->registerJs('$(window).on("scroll", function () {
 <? /*= Breadcrumbs::widget([
     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 ]) */ ?>
-<?= Alert::widget() ?>
+<div class="container">
+    <?= Alert::widget() ?>
+</div>
 
 <?= $content ?>
 

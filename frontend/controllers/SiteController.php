@@ -1,19 +1,23 @@
 <?php
 namespace frontend\controllers;
 
+use common\controllers\AbdullaController;
+use common\models\LoginForm;
+use frontend\models\ContactForm;
+use frontend\models\Course;
+use frontend\models\Lesson;
+use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResendVerificationEmailForm;
+use frontend\models\ResetPasswordForm;
+use frontend\models\SignupForm;
+use frontend\models\Subject;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
-use common\controllers\AbdullaController;
-use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
 
 /**
  * Site controller
@@ -74,7 +78,7 @@ class SiteController extends AbdullaController
      */
     public function actionIndex()
     {
-        $this->setMeta('Home - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Home') . ' - ' . Yii::$app->name);
 
         return $this->render('index');
     }
@@ -86,7 +90,7 @@ class SiteController extends AbdullaController
      */
     public function actionLogin()
     {
-        $this->setMeta('Login - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Login') . ' - ' . Yii::$app->name);
 
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
@@ -123,14 +127,14 @@ class SiteController extends AbdullaController
      */
     public function actionContact()
     {
-        $this->setMeta('Contact - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Contact') . ' - ' . Yii::$app->name);
 
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                Yii::$app->session->setFlash('success', Yii::t('yii', 'Thank you for contacting us. We will respond to you as soon as possible.'));
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('error', Yii::t('yii', 'There was an error sending your message.'));
             }
 
             return $this->refresh();
@@ -148,7 +152,7 @@ class SiteController extends AbdullaController
      */
     public function actionAbout()
     {
-        $this->setMeta('About - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'About') . ' - ' . Yii::$app->name);
 
         return $this->render('about');
     }
@@ -160,11 +164,11 @@ class SiteController extends AbdullaController
      */
     public function actionSignup()
     {
-        $this->setMeta('SignUp - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'SignUp') . ' - ' . Yii::$app->name);
 
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
-            Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');
+            Yii::$app->session->setFlash('success', Yii::t('yii', 'Thank you for registration. Please check your inbox for verification email.'));
             return $this->goHome();
         }
 
@@ -180,16 +184,16 @@ class SiteController extends AbdullaController
      */
     public function actionRequestPasswordReset()
     {
-        $this->setMeta('Request password reset - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Request password reset') . ' - ' . Yii::$app->name);
 
         $model = new PasswordResetRequestForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                Yii::$app->session->setFlash('success', Yii::t('yii', 'Check your email for further instructions.'));
 
                 return $this->goHome();
             } else {
-                Yii::$app->session->setFlash('error', 'Sorry, we are unable to reset password for the provided email address.');
+                Yii::$app->session->setFlash('error', Yii::t('yii', 'Sorry, we are unable to reset password for the provided email address.'));
             }
         }
 
@@ -207,7 +211,7 @@ class SiteController extends AbdullaController
      */
     public function actionResetPassword($token)
     {
-        $this->setMeta('Reset password - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Reset password') . ' - ' . Yii::$app->name);
 
         try {
             $model = new ResetPasswordForm($token);
@@ -216,7 +220,7 @@ class SiteController extends AbdullaController
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() && $model->resetPassword()) {
-            Yii::$app->session->setFlash('success', 'New password saved.');
+            Yii::$app->session->setFlash('success', Yii::t('yii', 'New password saved.'));
 
             return $this->goHome();
         }
@@ -230,12 +234,12 @@ class SiteController extends AbdullaController
      * Verify email address
      *
      * @param string $token
-     * @throws BadRequestHttpException
      * @return yii\web\Response
+     * @throws BadRequestHttpException
      */
     public function actionVerifyEmail($token)
     {
-        $this->setMeta('Verify email - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Verify email') . ' - ' . Yii::$app->name);
 
         try {
             $model = new VerifyEmailForm($token);
@@ -244,12 +248,12 @@ class SiteController extends AbdullaController
         }
         if ($user = $model->verifyEmail()) {
             if (Yii::$app->user->login($user)) {
-                Yii::$app->session->setFlash('success', 'Your email has been confirmed!');
+                Yii::$app->session->setFlash('success', Yii::t('yii', 'Your email has been confirmed!'));
                 return $this->goHome();
             }
         }
 
-        Yii::$app->session->setFlash('error', 'Sorry, we are unable to verify your account with provided token.');
+        Yii::$app->session->setFlash('error', Yii::t('yii', 'Sorry, we are unable to verify your account with provided token.'));
         return $this->goHome();
     }
 
@@ -260,7 +264,7 @@ class SiteController extends AbdullaController
      */
     public function actionResendVerificationEmail()
     {
-        $this->setMeta('Resend verification email - '.Yii::$app->name);
+        $this->setMeta(Yii::t('yii', 'Resend verification email') . ' - ' . Yii::$app->name);
 
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
@@ -276,9 +280,66 @@ class SiteController extends AbdullaController
         ]);
     }
 
-    public function actionCourses(){
-        $this->setMeta('Courses - '.Yii::$app->name);
+    public function actionCourses(string $course_name = null)
+    {
+        $query = Course::find()->where(['status' => Course::STATUS_ACTIVE]);
+        $courses_list = $query->all();
+        if ($course_name !== null) {
+            $query->andWhere(['name_' . Yii::$app->language => $course_name]);
+            return $this->redirect(['site/subjects', 'course_id' => $query->one()['id']]);
+        }
 
-        return $this->render('courses');
+        $this->setMeta(Yii::t('yii', 'Courses') . ' - ' . Yii::$app->name);
+
+        $courses = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 8,
+            ],
+        ]);
+
+        return $this->render('courses', compact('courses', 'courses_list', 'course_name'));
+    }
+
+    public function actionSubjects(int $course_id = null, string $course_name = null)
+    {
+        $course = Course::findOne($course_id);
+        if ($course_name !== null)
+            $course = Course::findOne(['name_' . Yii::$app->language => $course_name]);
+
+        $this->setMeta(Yii::t('yii', 'Subjects') . ' - ' . Yii::t('yii', $course['name_' . Yii::$app->language]) . Yii::$app->name);
+
+        $course_id = $course->id;
+        $subjects = new ActiveDataProvider([
+            'query' => Subject::find()->where(['status' => Subject::STATUS_ACTIVE, 'course_id' => $course_id]),
+            'pagination' => [
+                'pageSize' => 8,
+            ],
+        ]);
+
+        $courses = Course::find()->where(['status' => Course::STATUS_ACTIVE])->all();
+
+        return $this->render('subjects', compact('subjects', 'course_id', 'courses'));
+    }
+
+    public function actionLessons(int $subject_id = null, string $subject_name = null)
+    {
+        $subject = Subject::findOne($subject_id);
+        if ($subject_name !== null)
+            $subject = Subject::findOne(['name_' . Yii::$app->language => $subject_name]);
+
+        $this->setMeta(Yii::t('yii', 'Lessons') . ' / ' . Yii::t('yii', $subject['name_' . Yii::$app->language]) . ' - ' . Yii::$app->name);
+
+        $subject_id = $subject->id;
+        $lessons = new ActiveDataProvider([
+            'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'subject_id' => $subject_id]),
+            'pagination' => [
+                'pageSize' => 8,
+            ],
+        ]);
+
+        $subjects = Subject::find()->where(['status' => Subject::STATUS_ACTIVE, 'course_id' => $subject->course_id])->all();
+
+        return $this->render('lessons', compact('lessons', 'subject_id', 'subjects'));
     }
 }
