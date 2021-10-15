@@ -57,6 +57,8 @@
                     ['label' => Yii::t('yii','Exam solution history'), 'url' => ['exam-solution-history/index'], 'icon' => 'th'],
                     ['label' => Yii::t('yii','Keywords'), 'url' => ['keyword/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
                     ['label' => Yii::t('yii','Statuses'), 'url' => ['status/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
+                    ['label' => Yii::t('yii','Contacts'), 'url' => ['contact/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
+                    ['label' => Yii::t('yii','Contact of user'), 'url' => ['contacts-of-user/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
                     ['label' => 'Yii2 PROVIDED', 'header' => true],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Gii',  'icon' => 'file-code', 'url' => ['/gii'], 'target' => '_blank'],

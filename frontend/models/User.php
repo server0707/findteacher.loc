@@ -93,6 +93,16 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[ContactsOfUsers]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContactsOfUsers()
+    {
+        return $this->hasMany(ContactsOfUser::className(), ['user_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[ExamSolutionHistories]].
      *
      * @return \yii\db\ActiveQuery
