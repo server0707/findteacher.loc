@@ -25,7 +25,12 @@ use Yii;
  * @property int $updated_at
  * @property int $created_by
  * @property int $updated_by
+ * @property string|null $start_time
+ * @property string|null $finish_time
+ * @property string|null $address
+ * @property int|null $region_id
  *
+ * @property Region $region
  * @property Subject $subject
  * @property User $user
  */
@@ -58,9 +63,11 @@ class Lesson extends \yii\db\ActiveRecord
     {
         return [
             [['user_id', 'subject_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
-            [['user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['about_uz', 'about_ru', 'keywords'], 'string'],
+            [['user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'region_id'], 'integer'],
+            [['about_uz', 'about_ru', 'keywords', 'address'], 'string'],
+            [['start_time', 'finish_time'], 'safe'],
             [['description_uz', 'description_ru', 'price', 'old_price', 'link_of_lesson_video'], 'string', 'max' => 255],
+            [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subject::className(), 'targetAttribute' => ['subject_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
@@ -90,7 +97,22 @@ class Lesson extends \yii\db\ActiveRecord
             'updated_at' => Yii::t('yii', 'Updated At'),
             'created_by' => Yii::t('yii', 'Created By'),
             'updated_by' => Yii::t('yii', 'Updated By'),
+            'start_time' => Yii::t('yii', 'Start Time'),
+            'finish_time' => Yii::t('yii', 'Finish Time'),
+            'address' => Yii::t('yii', 'Address'),
+            'region_id' => Yii::t('yii', 'Region ID'),
         ];
+    }
+
+
+    /**
+     * Gets query for [[Region]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRegion()
+    {
+        return $this->hasOne(Region::className(), ['id' => 'region_id']);
     }
 
     /**

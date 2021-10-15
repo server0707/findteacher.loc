@@ -46,6 +46,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'updated_by')->textInput() ?>
 
+    <?= $form->field($model, 'start_time')->textInput() ?>
+
+    <?= $form->field($model, 'finish_time')->textInput() ?>
+
+    <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'region_id')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

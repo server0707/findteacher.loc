@@ -51,6 +51,14 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'updated_by') ?>
 
+    <?php // echo $form->field($model, 'start_time') ?>
+
+    <?php // echo $form->field($model, 'finish_time') ?>
+
+    <?php // echo $form->field($model, 'address') ?>
+
+    <?php // echo $form->field($model, 'region_id') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('yii', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>

@@ -17,8 +17,8 @@ class LessonSearch extends Lesson
     public function rules()
     {
         return [
-            [['id', 'user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['about_uz', 'about_ru', 'keywords', 'description_uz', 'description_ru', 'price', 'old_price', 'link_of_lesson_video'], 'safe'],
+            [['id', 'user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'region_id'], 'integer'],
+            [['about_uz', 'about_ru', 'keywords', 'description_uz', 'description_ru', 'price', 'old_price', 'link_of_lesson_video', 'start_time', 'finish_time', 'address'], 'safe'],
         ];
     }
 
@@ -68,6 +68,9 @@ class LessonSearch extends Lesson
             'updated_at' => $this->updated_at,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,
+            'start_time' => $this->start_time,
+            'finish_time' => $this->finish_time,
+            'region_id' => $this->region_id,
         ]);
 
         $query->andFilterWhere(['like', 'about_uz', $this->about_uz])
@@ -77,7 +80,8 @@ class LessonSearch extends Lesson
             ->andFilterWhere(['like', 'description_ru', $this->description_ru])
             ->andFilterWhere(['like', 'price', $this->price])
             ->andFilterWhere(['like', 'old_price', $this->old_price])
-            ->andFilterWhere(['like', 'link_of_lesson_video', $this->link_of_lesson_video]);
+            ->andFilterWhere(['like', 'link_of_lesson_video', $this->link_of_lesson_video])
+            ->andFilterWhere(['like', 'address', $this->address]);
 
         return $dataProvider;
     }

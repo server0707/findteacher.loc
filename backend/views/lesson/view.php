@@ -47,6 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'created_by',
             'updated_by',
+            'start_time',
+            'finish_time',
+            'address:ntext',
+            'region_id',
         ],
     ]) ?>
 
