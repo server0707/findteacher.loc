@@ -12,12 +12,14 @@ use frontend\models\ResendVerificationEmailForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\Subject;
+use frontend\models\User;
 use frontend\models\VerifyEmailForm;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 
 /**
@@ -344,7 +346,7 @@ class SiteController extends AbdullaController
         return $this->render('lessons', compact('lessons', 'subject_id', 'subjects'));
     }
 
-    public function actionLessonDetails(int $id = null)
+    public function actionLessonDetails($id)
     {
         $lesson = Lesson::findOne(['id' => $id, 'status' => Subject::STATUS_ACTIVE]);
 
@@ -358,6 +360,31 @@ class SiteController extends AbdullaController
     }
 
     public function actionTeachers(){
+        $this->setMeta(Yii::t('yii', 'Teachers') . ' - ' . Yii::$app->name);
 
+        $teachers = new ActiveDataProvider([
+            'query' => User::getTeachers(),
+            'pagination' => [
+                'pageSize' => 8,
+            ],
+        ]);
+
+        return $this->render('teachers', compact('teachers'));
+    }
+
+    public function actionTeacherDetails($id){
+        $teacher = User::findOne(['id' => $id, 'status' => User::STATUS_ACTIVE]);
+        if (empty($teacher) || $teacher == null){
+            throw new \yii\web\HttpException(404,Yii::t('yii','Page not found.'));
+        }
+        $this->setMeta($teacher->getFullName() . ' - ' . Yii::$app->name,$teacher->keywords,$teacher['description_'.Yii::$app->language],Url::base(true).$teacher->getImage()->getUrl(),Url::base(true).Url::to(['site/teacher-details','id'=>$id]));
+
+        $lessons = new ActiveDataProvider([
+            'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'user_id' => $id]),
+            'pagination' => [
+                'pageSize' => 3,
+            ],
+        ]);
+        return $this->render('teacher_details', compact('teacher', 'lessons'));
     }
 }

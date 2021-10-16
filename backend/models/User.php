@@ -26,6 +26,12 @@ use yii\db\ActiveRecord;
  * @property int|null $sex
  * @property string $role
  *
+ * @property string $keywords
+ * @property string $description_uz
+ * @property string $description_ru
+ * @property string $about_ru
+ * @property string $about_uz
+ *
  * @property ExamSolutionHistory[] $examSolutionHistories
  * @property Lesson[] $lessons
  * @property Question[] $questions
@@ -62,7 +68,7 @@ class User extends \yii\db\ActiveRecord
         return [
             [['username', 'auth_key', 'password_hash', 'email', /*'created_at', 'updated_at'*/], 'required'],
             [['status', 'created_at', 'updated_at', 'sex'], 'integer'],
-            [['role'], 'string'],
+            [['role', 'description_uz', 'description_uz', 'about_uz', 'about_ru', 'keywords'], 'string'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstName', 'lastName', 'fatherName'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
@@ -92,6 +98,11 @@ class User extends \yii\db\ActiveRecord
             'fatherName' => Yii::t('yii', 'Father Name'),
             'sex' => Yii::t('yii', 'Sex'),
             'role' => Yii::t('yii', 'Role'),
+            'about_uz' => Yii::t('yii', 'About Uz'),
+            'about_ru' => Yii::t('yii', 'About Ru'),
+            'description_ru' => Yii::t('yii', 'Description Uz'),
+            'description_uz' => Yii::t('yii', 'Description Ru'),
+            'keywords' => Yii::t('yii', 'Keywords'),
         ];
     }
 

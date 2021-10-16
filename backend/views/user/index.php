@@ -41,6 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             //'fatherName',
             //'sex',
             //'role',
+            //'keywords',
+            //'description_uz',
+            //'description_ru',
+            //'about_uz',
+            //'about_ru',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

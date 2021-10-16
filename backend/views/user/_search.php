@@ -44,6 +44,11 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'sex') ?>
 
     <?php // echo $form->field($model, 'role') ?>
+    <?php // echo $form->field($model, 'description_uz') ?>
+    <?php // echo $form->field($model, 'description_ru') ?>
+    <?php // echo $form->field($model, 'about_uz') ?>
+    <?php // echo $form->field($model, 'about_ru') ?>
+    <?php // echo $form->field($model, 'keywords') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Search'), ['class' => 'btn btn-primary']) ?>

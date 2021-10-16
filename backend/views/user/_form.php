@@ -40,6 +40,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'role')->dropDownList([ 'admin' => 'Admin', 'teacher' => 'Teacher', 'student' => 'Student', ], ['prompt' => '']) ?>
 
+    <?= $form->field($model, 'description_uz')->textInput() ?>
+    <?= $form->field($model, 'description_ru')->textInput() ?>
+    <?= $form->field($model, 'about_uz')->widget(\dosamigos\tinymce\TinyMce::className()) ?>
+    <?= $form->field($model, 'about_ru')->widget(\dosamigos\tinymce\TinyMce::className()) ?>
+    <?= $form->field($model, 'keywords')->textInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

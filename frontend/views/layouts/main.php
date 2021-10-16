@@ -10,6 +10,9 @@ use yii\helpers\Html;
 
 AppAsset::register($this);
 
+$this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
+$this->registerJsFile('https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML');
+
 //<!-- stats number counter-->
 $this->registerJs("$('.counter').countUp();");
 
@@ -140,16 +143,19 @@ $this->registerJs('$(window).on("scroll", function () {
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav mx-lg-auto">
                     <li class="nav-item <?= (Yii::$app->controller->action->id == 'index') ? 'active' : '@@index__active' ?>">
-                        <a class="nav-link" href="<?= Yii::$app->homeUrl ?>">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="<?= Yii::$app->homeUrl ?>"><?=Yii::t('yii','Home')?> <?=(Yii::$app->controller->action->id == 'index')?'<span class="sr-only">(current)</span>':''?></a>
                     </li>
                     <li class="nav-item <?= (Yii::$app->controller->action->id == 'about') ? 'active' : '@@about__active' ?>">
-                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/about']) ?>">About</a>
+                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/about']) ?>"><?=Yii::t('yii','About')?> <?=(Yii::$app->controller->action->id == 'about')?'<span class="sr-only">(current)</span>':''?></a>
                     </li>
                     <li class="nav-item <?= (Yii::$app->controller->action->id == 'courses') ? 'active' : '@@courses__active' ?>">
-                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/courses']) ?>">Courses</a>
+                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/courses']) ?>"><?=Yii::t('yii','Courses')?> <?=(Yii::$app->controller->action->id == 'courses')?'<span class="sr-only">(current)</span>':''?></a>
                     </li>
                     <li class="nav-item <?= (Yii::$app->controller->action->id == 'contact') ? 'active' : '@@contact__active' ?>">
-                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/contact']) ?>">Contact</a>
+                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/contact']) ?>"><?=Yii::t('yii','Contact')?> <?=(Yii::$app->controller->action->id == 'contact')?'<span class="sr-only">(current)</span>':''?></a>
+                    </li>
+                    <li class="nav-item <?= (Yii::$app->controller->action->id == 'teachers') ? 'active' : '@@teachers__active' ?>">
+                        <a class="nav-link" href="<?= \yii\helpers\Url::to(['site/teachers']) ?>"><?=Yii::t('yii','Teachers')?> <?=(Yii::$app->controller->action->id == 'teachers')?'<span class="sr-only">(current)</span>':''?></a>
                     </li>
                     <li class="nav-item">
                         <?= \common\widgets\LanguageChangerBootstrap4::widget() ?>
