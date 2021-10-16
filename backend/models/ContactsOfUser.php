@@ -25,6 +25,10 @@ use yii\db\ActiveRecord;
  */
 class ContactsOfUser extends \yii\db\ActiveRecord
 {
+    const STATUS_INACTIVE = 0;
+    const STATUS_ACTIVE = 1;
+    const STATUS_DELETED = 2;
+
     public function behaviors()
     {
         return [
@@ -58,7 +62,7 @@ class ContactsOfUser extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'contact_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
+            [['user_id', 'contact_id', /*'created_at', 'updated_at', 'created_by', 'updated_by'*/], 'required'],
             [['user_id', 'contact_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
             [['value'], 'string', 'max' => 255],
             [['contact_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contact::className(), 'targetAttribute' => ['contact_id' => 'id']],

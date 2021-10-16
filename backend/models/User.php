@@ -23,7 +23,6 @@ use yii\db\ActiveRecord;
  * @property string|null $firstName
  * @property string|null $lastName
  * @property string|null $fatherName
- * @property string|null $phone
  * @property int|null $sex
  * @property string $role
  *
@@ -64,7 +63,7 @@ class User extends \yii\db\ActiveRecord
             [['username', 'auth_key', 'password_hash', 'email', /*'created_at', 'updated_at'*/], 'required'],
             [['status', 'created_at', 'updated_at', 'sex'], 'integer'],
             [['role'], 'string'],
-            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstName', 'lastName', 'fatherName', 'phone'], 'string', 'max' => 255],
+            [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'firstName', 'lastName', 'fatherName'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
@@ -91,7 +90,6 @@ class User extends \yii\db\ActiveRecord
             'firstName' => Yii::t('yii', 'First Name'),
             'lastName' => Yii::t('yii', 'Last Name'),
             'fatherName' => Yii::t('yii', 'Father Name'),
-            'phone' => Yii::t('yii', 'Phone'),
             'sex' => Yii::t('yii', 'Sex'),
             'role' => Yii::t('yii', 'Role'),
         ];

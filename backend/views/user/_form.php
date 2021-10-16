@@ -36,8 +36,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'fatherName')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'sex')->textInput() ?>
 
     <?= $form->field($model, 'role')->dropDownList([ 'admin' => 'Admin', 'teacher' => 'Teacher', 'student' => 'Student', ], ['prompt' => '']) ?>

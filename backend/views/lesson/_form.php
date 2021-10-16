@@ -54,6 +54,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'address')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'days')->textInput(['rows' => 6]) ?>
+
     <?= $form->field($model, 'region_id')->textInput() ?>
 
     <div class="form-group">

@@ -29,6 +29,7 @@ use Yii;
  * @property string|null $start_time
  * @property string|null $finish_time
  * @property string|null $address
+ * @property string|null $days
  * @property int|null $region_id
  *
  * @property Region $region
@@ -65,7 +66,7 @@ class Lesson extends \yii\db\ActiveRecord
         return [
             [['user_id', 'subject_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'required'],
             [['user_id', 'subject_id', 'viewed', 'student_count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'region_id'], 'integer'],
-            [['about_uz', 'about_ru', 'keywords', 'address', 'duration'], 'string'],
+            [['about_uz', 'about_ru', 'keywords', 'address', 'duration', 'days'], 'string'],
             [['start_time', 'finish_time'], 'safe'],
             [['description_uz', 'description_ru', 'price', 'old_price', 'link_of_lesson_video'], 'string', 'max' => 255],
             [['region_id'], 'exist', 'skipOnError' => true, 'targetClass' => Region::className(), 'targetAttribute' => ['region_id' => 'id']],
@@ -102,6 +103,7 @@ class Lesson extends \yii\db\ActiveRecord
             'start_time' => Yii::t('yii', 'Start Time'),
             'finish_time' => Yii::t('yii', 'Finish Time'),
             'address' => Yii::t('yii', 'Address'),
+            'days' => Yii::t('yii', 'Days'),
             'region_id' => Yii::t('yii', 'Region ID'),
         ];
     }
@@ -135,5 +137,24 @@ class Lesson extends \yii\db\ActiveRecord
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getContactType($contact_name){
+        $check_phone = strpos(strtolower($contact_name), 'phone');
+        $check_email = strpos(strtolower($contact_name), 'mail');
+
+        if ($check_phone !== false){
+            return 'tel:';
+        }
+
+        if ($check_email !== false){
+            return 'mailto:';
+        }
+
+        return '';
+    }
+
+    public function getLinkToContact($contact_name, $contact_value){
+        return $this->getContactType($contact_name) . $contact_value;
     }
 }

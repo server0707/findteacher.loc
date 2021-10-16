@@ -50,7 +50,7 @@ $this->registerJs('$(".custom-select").on(\'input\', function () {
                         <div class="col-lg-4 col-md-6 item mt-md-0 mt-5">
                             <div class="card">
                                 <div class="card-header p-0 position-relative">
-                                    <a href="#course-single" class="zoom d-block">
+                                    <a href="<?=\yii\helpers\Url::to(['site/lesson-details', 'id' => $lesson->id])?>" class="zoom d-block">
                                         <img class="card-img-bottom d-block" src="<?=$lesson->getImage()->getUrl()?>"
                                              alt="<?=$lesson->subject['name_' . $lan]?>">
                                     </a>
@@ -75,7 +75,7 @@ $this->registerJs('$(".custom-select").on(\'input\', function () {
                                             <li><span class="fa fa-star-o"></span></li>
                                         </ul>
                                     </div>
-                                    <a href="#course-single" class="course-desc"><?=$lesson['description_' . $lan]?></a>
+                                    <a href="<?=\yii\helpers\Url::to(['site/lesson-details', 'id' => $lesson->id])?>" class="course-desc"><?=$lesson['description_' . $lan]?></a>
                                     <div class="course-meta mt-4">
                                         <div class="meta-item course-lesson">
                                             <span class="fa fa-clock-o"></span>
@@ -92,10 +92,10 @@ $this->registerJs('$(".custom-select").on(\'input\', function () {
                                         <img src="<?=$lesson->user->getImage()->getUrl()?>" alt="<?=$lesson->subject['name_' . $lan]?>'s image of Teacher" class="img-fluid rounded-circle">
                                         <ul class="blog-meta">
                                             <li>
-                                                <span class="meta-value mx-1">by</span> <a href="#author"> <?=$lesson->user->getFullName()?></a>
+                                                <span class="meta-value mx-1">by</span> <a href="<?=\yii\helpers\Url::to(['site/teacher-details', 'id' => $lesson->user_id])?>"> <?=$lesson->user->getFullName()?></a>
                                             </li>
                                             <li>
-                                                <span class="meta-value mx-1">in</span> <a href="#author"> <?=$lesson->subject['name_' . $lan]?></a>
+                                                <span class="meta-value mx-1">in</span> <a href="<?=\yii\helpers\Url::to(['site/subjects','course_id'=>$lesson->subject->course_id])?>"> <?=$lesson->subject['name_' . $lan]?></a>
                                             </li>
                                         </ul>
                                     </div>

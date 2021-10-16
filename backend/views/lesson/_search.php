@@ -59,6 +59,8 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'address') ?>
 
+    <?php // echo $form->field($model, 'days') ?>
+
     <?php // echo $form->field($model, 'region_id') ?>
 
     <div class="form-group">

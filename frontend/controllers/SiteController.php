@@ -343,4 +343,21 @@ class SiteController extends AbdullaController
 
         return $this->render('lessons', compact('lessons', 'subject_id', 'subjects'));
     }
+
+    public function actionLessonDetails(int $id = null)
+    {
+        $lesson = Lesson::findOne(['id' => $id, 'status' => Subject::STATUS_ACTIVE]);
+
+        if (empty($lesson) || $lesson == null){
+            throw new \yii\web\HttpException(404,Yii::t('yii','Page not found.'));
+        }
+
+        $this->setMeta($lesson->user->getFullName() . ': ' . Yii::t('yii', $lesson->subject['name_' . Yii::$app->language]) . ' - ' . Yii::$app->name, $lesson->keywords, $lesson['description_' . Yii::$app->language]);
+
+        return $this->render('lesson_details', compact('lesson'));
+    }
+
+    public function actionTeachers(){
+
+    }
 }

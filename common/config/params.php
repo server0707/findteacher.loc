@@ -11,4 +11,5 @@ return [
         'ru'=>'Русский',
         'uz'=>"O'zbek",
     ],
+    'youtubeApiKey' => 'AIzaSyBq6_ezsYa-VYkneofrGGfGXlE8wOTqSwI',
 ];

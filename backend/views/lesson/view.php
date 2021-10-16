@@ -51,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'start_time',
             'finish_time',
             'address:ntext',
+            'days:ntext',
             'region_id',
         ],
     ]) ?>
