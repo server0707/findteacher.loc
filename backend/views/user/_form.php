@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
@@ -45,6 +45,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'about_uz')->widget(\dosamigos\tinymce\TinyMce::className()) ?>
     <?= $form->field($model, 'about_ru')->widget(\dosamigos\tinymce\TinyMce::className()) ?>
     <?= $form->field($model, 'keywords')->textInput() ?>
+
+    <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*']) ?>
+    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success']) ?>
