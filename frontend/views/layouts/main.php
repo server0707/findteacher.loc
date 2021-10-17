@@ -230,6 +230,12 @@ $this->registerJs('$(window).on("scroll", function () {
                             <a href="<?= \yii\helpers\Url::to(['courses']) ?>"><?= Yii::t('yii', 'Courses') ?></a>
                         </li>
                     <?php endif; ?>
+                    <?php if (Yii::$app->controller->action->id == 'lesson-details') : ?>
+                        <li> /
+                            <a href="<?=Yii::$app->request->referrer?>"><?= Yii::t('yii', 'Lessons') ?></a>
+                        </li>
+                    <?php endif; ?>
+
                     <?php if (Yii::$app->controller->action->id == 'teacher-details') : ?>
                         <li> /
                             <a href="<?= \yii\helpers\Url::to(['teachers']) ?>"><?= Yii::t('yii', 'Teachers') ?></a>
