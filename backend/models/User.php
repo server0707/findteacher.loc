@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
+use yii\validators\DateValidator;
 use yii\web\UploadedFile;
 
 /**
@@ -32,6 +33,8 @@ use yii\web\UploadedFile;
  * @property string $description_ru
  * @property string $about_ru
  * @property string $about_uz
+ *
+ * @property DateValidator $birthDate
  *
  * @property ExamSolutionHistory[] $examSolutionHistories
  * @property Lesson[] $lessons
@@ -81,6 +84,7 @@ class User extends \yii\db\ActiveRecord
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['birthDate'], 'date'],
             [['password_reset_token'], 'unique'],
 
             [['image'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],
@@ -114,6 +118,8 @@ class User extends \yii\db\ActiveRecord
             'description_ru' => Yii::t('yii', 'Description Uz'),
             'description_uz' => Yii::t('yii', 'Description Ru'),
             'keywords' => Yii::t('yii', 'Keywords'),
+
+            'birthDate' => Yii::t('yii', 'Birth date'),
 
             'image' => Yii::t('yii', 'Image'),
             'gallery' => Yii::t('yii', 'Gallery'),

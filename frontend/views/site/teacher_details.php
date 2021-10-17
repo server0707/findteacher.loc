@@ -20,8 +20,11 @@ $lang = Yii::$app->language;
                     </div>
                     <div class="col-lg-6 left-wthree-img mt-lg-0 mt-sm-5 mt-4">
                         <p><b><?= Yii::t('yii', 'Teacher_fullName') ?>: </b><?= $teacher->getFullName() ?></p>
+                        <p>
+                            <b><?= ($teacher->getAge() !== '') ? Yii::t('yii', 'Age') . ':' : '' ?> </b><?= $teacher->getAge() ?>
+                        </p>
                         <div>
-                            <p><b><?= Yii::t('yii', 'Contacts') ?>: </b>
+                            <p><b><?= (!empty($teacher->contactsOfUsers)) ? Yii::t('yii', 'Contacts') . ':' : '' ?> </b>
                             <ul style="margin-left: 30px;">
                                 <?php foreach ($teacher->contactsOfUsers as $contact) : ?>
                                     <li><b><?= $contact->contact->name ?>: </b>

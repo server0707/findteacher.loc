@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use Yii;
+use yii\validators\DateValidator;
 
 /**
  * This is the model class for table "user".
@@ -28,6 +29,7 @@ use Yii;
  * @property string $description_ru
  * @property string $about_ru
  * @property string $about_uz
+ * @property DateValidator $birthDate
  *
  * @property ExamSolutionHistory[] $examSolutionHistories
  * @property Lesson[] $lessons
@@ -47,6 +49,7 @@ class User extends \yii\db\ActiveRecord
             ]
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -68,6 +71,7 @@ class User extends \yii\db\ActiveRecord
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
+            [['birthDate'], 'date'],
             [['password_reset_token'], 'unique'],
         ];
     }
@@ -98,6 +102,8 @@ class User extends \yii\db\ActiveRecord
             'description_ru' => Yii::t('yii', 'Description Uz'),
             'description_uz' => Yii::t('yii', 'Description Ru'),
             'keywords' => Yii::t('yii', 'Keywords'),
+
+            'birthDate' => Yii::t('yii', 'Birth date'),
         ];
     }
 
@@ -141,31 +147,43 @@ class User extends \yii\db\ActiveRecord
         return $this->hasMany(Question::className(), ['user_id' => 'id']);
     }
 
-    public function getFullName(){
+    public function getFullName()
+    {
         $fullName = $this->lastName . ' ' . $this->firstName . ' ' . $this->fatherName;
         return (!empty($fullname) && $fullName != null) ? $fullName : $this->username;
     }
 
-    public static function getTeachers($status = User::STATUS_ACTIVE){
+    public static function getTeachers($status = User::STATUS_ACTIVE)
+    {
         return User::find()->where(['status' => $status, 'role' => 'teacher']);
     }
 
-    public function getContactType($contact_name){
+    public function getContactType($contact_name)
+    {
         $check_phone = strpos(strtolower($contact_name), 'phone');
         $check_email = strpos(strtolower($contact_name), 'mail');
 
-        if ($check_phone !== false){
+        if ($check_phone !== false) {
             return 'tel:';
         }
 
-        if ($check_email !== false){
+        if ($check_email !== false) {
             return 'mailto:';
         }
 
         return '';
     }
 
-    public function getLinkToContact($contact_name, $contact_value){
+    public function getLinkToContact($contact_name, $contact_value)
+    {
         return $this->getContactType($contact_name) . $contact_value;
+    }
+
+    public function getAge()
+    {
+        if (!empty($this->birthDate) || $this->birthDate !== null)
+            return date('Y', time()) - date('Y', strtotime($this->birthDate));
+        else
+            return '';
     }
 }

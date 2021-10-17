@@ -49,6 +49,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*']) ?>
     <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
+    <?= $form->field($model, 'birthDate')->input('date') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>

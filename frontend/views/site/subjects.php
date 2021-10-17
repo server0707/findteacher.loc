@@ -53,7 +53,7 @@ $this->registerJs('$(".custom-select").on(\'input\', function () {
                         <div class="col-lg-3 col-md-4 item mt-2">
                             <div class="card">
                                 <div class="card-header p-0 position-relative">
-                                    <a href="<?= \yii\helpers\Url::to(['site/lessons', 'subject_id' => $subject->id]) ?>"
+                                    <a href="<?= \yii\helpers\Url::to(['lessons/'.$subject->id]) ?>"
                                        class="zoom d-block">
                                         <img class="card-img-bottom d-block" src="<?= $subject->getImage()->getUrl() ?>"
                                              alt="<?= $subject['name_' . $lan] ?> - image">
@@ -63,7 +63,7 @@ $this->registerJs('$(".custom-select").on(\'input\', function () {
                                     </div>
                                 </div>
                                 <div class="card-body" style="height: 150px; overflow: auto">
-                                    <a href="<?= \yii\helpers\Url::to(['site/lessons', 'subject_id' => $subject->id]) ?>"
+                                    <a href="<?= \yii\helpers\Url::to(['lessons/'. $subject->id]) ?>"
                                        class="">
                                         <?= $subject['description_' . $lan] ?>
                                     </a>

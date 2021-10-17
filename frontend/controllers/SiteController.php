@@ -377,7 +377,7 @@ class SiteController extends AbdullaController
         if (empty($teacher) || $teacher == null){
             throw new \yii\web\HttpException(404,Yii::t('yii','Page not found.'));
         }
-        $this->setMeta($teacher->getFullName() . ' - ' . Yii::$app->name,$teacher->keywords,$teacher['description_'.Yii::$app->language],Url::base(true).$teacher->getImage()->getUrl(),Url::base(true).Url::to(['site/teacher-details','id'=>$id]));
+        $this->setMeta(ucfirst($teacher->getFullName()) . ' - ' . Yii::$app->name,$teacher->keywords,$teacher['description_'.Yii::$app->language],Url::base(true).$teacher->getImage()->getUrl(),Url::base(true).Url::to(['site/teacher-details','id'=>$id]));
 
         $lessons = new ActiveDataProvider([
             'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'user_id' => $id]),

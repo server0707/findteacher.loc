@@ -230,6 +230,11 @@ $this->registerJs('$(window).on("scroll", function () {
                             <a href="<?= \yii\helpers\Url::to(['courses']) ?>"><?= Yii::t('yii', 'Courses') ?></a>
                         </li>
                     <?php endif; ?>
+                    <?php if (Yii::$app->controller->action->id == 'teacher-details') : ?>
+                        <li> /
+                            <a href="<?= \yii\helpers\Url::to(['teachers']) ?>"><?= Yii::t('yii', 'Teachers') ?></a>
+                        </li>
+                    <?php endif; ?>
                     <li class="active">
                         / <?= Yii::t('yii', '<span class="text-capitalize">' . Yii::$app->controller->action->id . '</span>') ?></li>
                 </ul>

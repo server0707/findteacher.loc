@@ -50,6 +50,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'about_ru') ?>
     <?php // echo $form->field($model, 'keywords') ?>
 
+    <?php // echo $form->field($model, 'birthDate') ?>
+
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Search'), ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton(Yii::t('yii', 'Reset'), ['class' => 'btn btn-outline-secondary']) ?>
