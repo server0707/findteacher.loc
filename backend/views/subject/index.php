@@ -30,8 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'course_id',
             'name_uz',
             'name_ru',
-            'about_uz:ntext',
-            //'about_ru:ntext',
             //'keywords:ntext',
             //'description_uz',
             //'description_ru',

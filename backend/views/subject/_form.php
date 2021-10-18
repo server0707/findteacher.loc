@@ -10,17 +10,13 @@ use yii\widgets\ActiveForm;
 
 <div class="subject-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'course_id')->textInput() ?>
 
     <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'name_ru')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'about_uz')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'about_ru')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'keywords')->textarea(['rows' => 6]) ?>
 
@@ -37,6 +33,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'created_by')->textInput() ?>
 
     <?= $form->field($model, 'updated_by')->textInput() ?>
+
+    <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*']) ?>
+    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success']) ?>

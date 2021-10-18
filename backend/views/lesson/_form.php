@@ -10,15 +10,11 @@ use yii\widgets\ActiveForm;
 
 <div class="lesson-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'user_id')->textInput() ?>
 
     <?= $form->field($model, 'subject_id')->textInput() ?>
-
-    <?= $form->field($model, 'about_uz')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'about_ru')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'keywords')->textarea(['rows' => 6]) ?>
 
@@ -57,6 +53,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'days')->textInput(['rows' => 6]) ?>
 
     <?= $form->field($model, 'region_id')->textInput() ?>
+
+    <?= $form->field($model, 'image')->fileInput(['accept' => 'image/*']) ?>
+    <?= $form->field($model, 'gallery[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('yii', 'Save'), ['class' => 'btn btn-success']) ?>

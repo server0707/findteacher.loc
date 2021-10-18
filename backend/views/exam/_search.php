@@ -17,10 +17,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'about_uz') ?>
-
-    <?= $form->field($model, 'about_ru') ?>
-
     <?= $form->field($model, 'start_time') ?>
 
     <?= $form->field($model, 'finish_time') ?>

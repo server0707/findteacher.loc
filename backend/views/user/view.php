@@ -50,6 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'about_uz:raw',
             'keywords',
             'birthDate',
+            [
+                'attribute' => 'image',
+                'value' => Html::img($model->getImage()->getUrl(),['class' => 'w-25']),
+                'format' => 'raw',
+                'title' => Yii::t('yii', 'Image')
+            ]
         ],
     ]) ?>
 

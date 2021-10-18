@@ -32,8 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'user_id',
             'subject_id',
-            'about_uz:ntext',
-            'about_ru:ntext',
             'keywords:ntext',
             'description_uz',
             'description_ru',
@@ -53,6 +51,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'address:ntext',
             'days:ntext',
             'region_id',
+            [
+                'attribute' => 'image',
+                'value' => Html::img($model->getImage()->getUrl(),['class' => 'w-25']),
+                'format' => 'raw',
+                'title' => Yii::t('yii', 'Image')
+            ]
         ],
     ]) ?>
 

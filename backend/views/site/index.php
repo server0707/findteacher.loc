@@ -85,5 +85,5 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         </a>
     </div>
 
-<!--    --><?//=\yii\bootstrap4\Html::a('Add Data Page',['site/add-data'])?>
+    <?=\yii\bootstrap4\Html::a('Add Data Page',['site/add-data'])?>
 </div>

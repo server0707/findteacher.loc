@@ -18,7 +18,7 @@ class SubjectSearch extends Subject
     {
         return [
             [['id', 'course_id', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
-            [['name_uz', 'name_ru', 'about_uz', 'about_ru', 'keywords', 'description_uz', 'description_ru'], 'safe'],
+            [['name_uz', 'name_ru', 'keywords', 'description_uz', 'description_ru'], 'safe'],
         ];
     }
 
@@ -69,8 +69,6 @@ class SubjectSearch extends Subject
 
         $query->andFilterWhere(['like', 'name_uz', $this->name_uz])
             ->andFilterWhere(['like', 'name_ru', $this->name_ru])
-            ->andFilterWhere(['like', 'about_uz', $this->about_uz])
-            ->andFilterWhere(['like', 'about_ru', $this->about_ru])
             ->andFilterWhere(['like', 'keywords', $this->keywords])
             ->andFilterWhere(['like', 'description_uz', $this->description_uz])
             ->andFilterWhere(['like', 'description_ru', $this->description_ru]);

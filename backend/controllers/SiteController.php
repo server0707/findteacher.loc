@@ -3,6 +3,12 @@
 namespace backend\controllers;
 
 use backend\models\Answer;
+use backend\models\Course;
+use backend\models\Lesson;
+use backend\models\Question;
+use backend\models\Subject;
+use backend\models\Theme;
+use backend\models\User;
 use common\models\LoginForm;
 use Faker\Factory;
 use Yii;
@@ -126,7 +132,13 @@ class SiteController extends Controller
             $course->description_uz = $faker->text;
             $course->description_ru = $faker->text;
             $course->status = rand(0,2);
-            $course->save();
+            if (!$course->save()) {
+                echo "ID: " . $i . "<br>";
+                echo "<pre>";
+                var_dump($course->errors);
+                echo "<pre>";
+                die();
+            }
         }*/
 
         //200 ta fan qo'shish
@@ -140,7 +152,14 @@ class SiteController extends Controller
             $object->description_uz = $faker->text;
             $object->description_ru = $faker->text;
             $object->status = rand(0, 2);
-            $object->save();
+//            $object->save();
+            if (!$object->save()) {
+                echo "ID: " . $i . "<br>";
+                echo "<pre>";
+                var_dump($object->errors);
+                echo "<pre>";
+                die();
+            }
         }*/
 
         //3000 ta mavzu qo'shish
@@ -149,7 +168,14 @@ class SiteController extends Controller
             $object->subject_id = rand(1, 200);
             $object->name_uz = $faker->name;
             $object->name_ru = $faker->name;
-            $object->save();
+//            $object->save();
+            if (!$object->save()) {
+                echo "ID: " . $i . "<br>";
+                echo "<pre>";
+                var_dump($object->errors);
+                echo "<pre>";
+                die();
+            }
         }*/
 
         //50 ta user qo'shish
@@ -167,7 +193,14 @@ class SiteController extends Controller
             $object->lastName = $faker->lastName;
             $object->fatherName = (rand(0,10) != 0) ? $faker->lastName : '';
             $object->phone = $faker->phoneNumber;
-            $object->save();
+//            $object->save();
+            if (!$object->save()) {
+                echo "ID: " . $i . "<br>";
+                echo "<pre>";
+                var_dump($object->errors);
+                echo "<pre>";
+                die();
+            }
         }*/
 
         //75 ta lesson qo'shish
@@ -198,7 +231,7 @@ class SiteController extends Controller
         //15000 ta question qo'shish
         /*for ($i = 1; $i < 15000; $i++) {
             $object = new Question();
-            $object->user_id = rand(1, 57);
+            $object->user_id = rand(1, 50);
             $object->subject_id = rand(1, 200);
             $object->theme_id = rand(1, 3000);
             $object->status = rand(0, 2);

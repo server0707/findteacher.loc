@@ -51,7 +51,7 @@ $lang = Yii::$app->language;
                 <p><b><?= Yii::t('yii', 'Time') ?>: </b><?= $lesson->start_time ?> - <?= $lesson->finish_time ?></p>
                 <p><b><?= Yii::t('yii', 'Price') ?> </b><?= $lesson->price ?> <s><?= $lesson->old_price ?></s></p>
                 <p><b><?= Yii::t('yii', 'Duration') ?>: </b><?= $lesson->duration ?></p>
-                <p><b><?= Yii::t('yii', 'Students count') ?>: </b><?= $lesson->student_count ?></p>
+                <p><b><?= Yii::t('yii', 'Students Count') ?>: </b><?= $lesson->student_count ?></p>
                 <hr>
                 <h3 class="text-center"><?= Yii::t('yii', 'Teacher') ?>:</h3>
                 <img src="<?= $lesson->user->getImage()->getUrl() ?>" alt="Teacher image"

@@ -30,8 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'about_uz:ntext',
-            'about_ru:ntext',
             'start_time',
             'finish_time',
             'questions_list:ntext',
@@ -41,6 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
             'created_by',
             'updated_by',
+            [
+                'attribute' => 'image',
+                'value' => Html::img($model->getImage()->getUrl(),['class' => 'w-25']),
+                'format' => 'raw',
+                'title' => Yii::t('yii', 'Image')
+            ]
         ],
     ]) ?>
 
