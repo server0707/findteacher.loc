@@ -48,6 +48,7 @@ return [
                 'contact' => 'site/contact',
                 'lessons' => 'site/lessons',
                 'teachers' => 'site/teachers',
+                'teacher/<id:\d+>' => 'site/teacher-details',
                 'login' => 'site/login',
                 'lesson/<id:\d+>' => 'site/lesson-details',
                 'lessons/<subject_id:\d+>' => 'site/lessons',

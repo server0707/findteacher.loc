@@ -1,7 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-
+/* @var $lessons[] frontend\models\Lesson */
+$lang = Yii::$app->language;
 ?>
 <!-- main-slider -->
 <section class="w3l-main-slider" id="home">
@@ -84,23 +85,23 @@
 <section class="w3l-courses">
     <div class="blog pb-5" id="courses">
         <div class="container py-lg-5 py-md-4 py-2">
-            <h5 class="title-small text-center mb-1">Join our learn Courses</h5>
-            <h3 class="title-big text-center mb-sm-5 mb-4">Featured Online <span>Courses</span></h3>
+            <h5 class="title-small text-center mb-1"><?=Yii::t('yii','Find yourself a mentor with us')?></h5>
+            <h3 class="title-big text-center mb-sm-5 mb-4"><?=Yii::t('yii','Examples from lessons')?></h3>
             <div class="row">
                 <div class="col-lg-4 col-md-6 item">
                     <div class="card">
                         <div class="card-header p-0 position-relative">
-                            <a href="#course-single" class="zoom d-block">
-                                <img class="card-img-bottom d-block" src="/images/c1.jpg"
-                                     alt="Card image cap">
+                            <a href="<?=\yii\helpers\Url::to(['lesson/'.$lessons[0]->id])?>" class="zoom d-block">
+                                <img class="card-img-bottom d-block" src="<?=$lessons[0]->getImage()->getUrl('368x245')?>"
+                                     alt="<?=$lessons[0]['description_'.$lang]?>">
                             </a>
                             <div class="post-pos">
-                                <a href="#reciepe" class="receipe blue">Beginner</a>
+                                <a href="#reciepe" class="receipe blue"><?=$lessons[0]->subject['name_'.$lang]?></a>
                             </div>
                         </div>
-                        <div class="card-body course-details">
+                        <div style="height: 300px; overflow: auto" class="card-body course-details">
                             <div class="price-review d-flex justify-content-between mb-1align-items-center">
-                                <p>$35.00</p>
+                                <p><?=$lessons[0]->price?> <s class="small"><?=$lessons[0]->old_price?></s></p>
                                 <ul class="rating-star">
                                     <li><span class="fa fa-star"></span></li>
                                     <li><span class="fa fa-star"></span></li>
@@ -109,28 +110,27 @@
                                     <li><span class="fa fa-star-o"></span></li>
                                 </ul>
                             </div>
-                            <a href="#course-single" class="course-desc">Open Programming Courses for everyone : Python
-                            </a>
+                            <a href="<?=\yii\helpers\Url::to(['lesson/'.$lessons[0]->id])?>" class="course-desc"><?=$lessons[0]['description_'.$lang]?></a>
                             <div class="course-meta mt-4">
                                 <div class="meta-item course-lesson">
                                     <span class="fa fa-clock-o"></span>
-                                    <span class="meta-value"> 20 hrs </span>
+                                    <span class="meta-value"> <?=$lessons[0]->duration?> </span>
                                 </div>
                                 <div class="meta-item course-">
                                     <span class="fa fa-user-o"></span>
-                                    <span class="meta-value"> 50 </span>
+                                    <span class="meta-value"> <?=$lessons[0]->student_count?> </span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="author align-items-center">
-                                <img src="/images/a1.jpg" alt="" class="img-fluid rounded-circle">
+                                <img src="<?=$lessons[0]->user->getImage()->getUrl()?>" alt="Teacher image" class="img-fluid rounded-circle">
                                 <ul class="blog-meta">
                                     <li>
-                                        <span class="meta-value mx-1">by</span> <a href="#author"> Olivia</a>
+                                        <span class="meta-value mx-1">by</span> <a href="<?= \yii\helpers\Url::to(['site/teacher-details', 'id' => $lessons[0]->user_id]) ?>"> <?=$lessons[0]->user->getFullName()?></a>
                                     </li>
                                     <li>
-                                        <span class="meta-value mx-1">in</span> <a href="#author"> Programing</a>
+                                        <span class="meta-value mx-1">in</span> <a href="<?= \yii\helpers\Url::to(['site/subjects', 'course_id' => $lessons[0]->subject->course_id]) ?>"> <?=$lessons[0]->subject['name_'.$lang]?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -141,18 +141,20 @@
                 <div class="col-lg-4 col-md-6 item mt-md-0 mt-5">
                     <div class="card">
                         <div class="card-header p-0 position-relative">
-                            <a href="#course-single" class="zoom d-block">
-                                <img class="card-img-bottom d-block" src="/images/c5.jpg"
-                                     alt="Card image cap">
+                            <a href="<?=\yii\helpers\Url::to(['lesson/'.$lessons[1]->id])?>" class="zoom d-block">
+                                <img class="card-img-bottom d-block" src="<?=$lessons[1]->getImage()->getUrl('368x245')?>"
+                                     alt="<?=$lessons[1]['description_'.$lang]?>">
                             </a>
-                            <div class="course-price-badge"> Free</div>
+                            <?php if(empty($lessons[1]->price) || $lessons[1]->price == 0): ?>
+                                <div class="course-price-badge"> Free</div>
+                            <?php endif; ?>
                             <div class="post-pos">
-                                <a href="#reciepe" class="receipe blue">Beginner</a>
+                                <a href="#reciepe" class="receipe blue"><?=$lessons[1]->subject['name_'.$lang]?></a>
                             </div>
                         </div>
-                        <div class="card-body course-details">
+                        <div style="height: 300px; overflow: auto" class="card-body course-details">
                             <div class="price-review d-flex justify-content-between mb-1align-items-center">
-                                <p>$0.00</p>
+                                <p><?=$lessons[1]->price?> <s class="small"><?=$lessons[1]->old_price?></s></p>
                                 <ul class="rating-star">
                                     <li><span class="fa fa-star"></span></li>
                                     <li><span class="fa fa-star"></span></li>
@@ -161,28 +163,27 @@
                                     <li><span class="fa fa-star-o"></span></li>
                                 </ul>
                             </div>
-                            <a href="#course-single" class="course-desc">Learning to Write as a clean and Professional
-                                Author</a>
+                            <a href="<?=\yii\helpers\Url::to(['lesson/'.$lessons[1]->id])?>" class="course-desc"><?=$lessons[1]['description_'.$lang]?></a>
                             <div class="course-meta mt-4">
                                 <div class="meta-item course-lesson">
                                     <span class="fa fa-clock-o"></span>
-                                    <span class="meta-value"> 20 hrs </span>
+                                    <span class="meta-value"> <?=$lessons[1]->duration?> </span>
                                 </div>
                                 <div class="meta-item course-">
                                     <span class="fa fa-user-o"></span>
-                                    <span class="meta-value"> 50 </span>
+                                    <span class="meta-value"> <?=$lessons[1]->student_count?> </span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="author align-items-center">
-                                <img src="/images/a2.jpg" alt="" class="img-fluid rounded-circle">
+                                <img src="<?=$lessons[1]->user->getImage()->getUrl()?>" alt="Teacher image" class="img-fluid rounded-circle">
                                 <ul class="blog-meta">
                                     <li>
-                                        <span class="meta-value mx-1">by</span> <a href="#author"> Isabella</a>
+                                        <span class="meta-value mx-1">by</span> <a href="<?= \yii\helpers\Url::to(['site/teacher-details', 'id' => $lessons[1]->user_id]) ?>"> <?=$lessons[1]->user->getFullName()?></a>
                                     </li>
                                     <li>
-                                        <span class="meta-value mx-1">in</span> <a href="#author"> Teaching</a>
+                                        <span class="meta-value mx-1">in</span> <a href="<?= \yii\helpers\Url::to(['site/subjects', 'course_id' => $lessons[1]->subject->course_id]) ?>"> <?=$lessons[1]->subject['name_'.$lang]?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -193,15 +194,20 @@
                 <div class="col-lg-4 col-md-6 item mt-lg-0 mt-5">
                     <div class="card">
                         <div class="card-header p-0 position-relative">
-                            <a href="#course-single" class="zoom d-block">
-                                <img class="card-img-bottom d-block" src="/images/c6.jpg"
-                                     alt="Card image cap">
+                            <a href="<?=\yii\helpers\Url::to(['lesson/'.$lessons[2]->id])?>" class="zoom d-block">
+                                <img class="card-img-bottom d-block" src="<?=$lessons[2]->getImage()->getUrl('368x245')?>"
+                                     alt="<?=$lessons[2]['description_'.$lang]?>">
                             </a>
-                            <div class="course-price-badge-new"> New</div>
+                            <?php if(empty($lessons[2]->price) || $lessons[2]->price == 0): ?>
+                                <div class="course-price-badge"> Free</div>
+                            <?php endif; ?>
+                            <div class="post-pos">
+                                <a href="#reciepe" class="receipe blue"><?=$lessons[2]->subject['name_'.$lang]?></a>
+                            </div>
                         </div>
-                        <div class="card-body course-details">
+                        <div style="height: 300px; overflow: auto" class="card-body course-details">
                             <div class="price-review d-flex justify-content-between mb-1align-items-center">
-                                <p>$49.00</p>
+                                <p><?=$lessons[2]->price?> <s class="small"><?=$lessons[2]->old_price?></s></p>
                                 <ul class="rating-star">
                                     <li><span class="fa fa-star"></span></li>
                                     <li><span class="fa fa-star"></span></li>
@@ -210,27 +216,27 @@
                                     <li><span class="fa fa-star-o"></span></li>
                                 </ul>
                             </div>
-                            <a href="#course-single" class="course-desc">Learn Master JQuery in a Short Period of Time</a>
+                            <a href="<?=\yii\helpers\Url::to(['lesson/'.$lessons[2]->id])?>" class="course-desc"><?=$lessons[2]['description_'.$lang]?></a>
                             <div class="course-meta mt-4">
                                 <div class="meta-item course-lesson">
                                     <span class="fa fa-clock-o"></span>
-                                    <span class="meta-value"> 20 hrs </span>
+                                    <span class="meta-value"> <?=$lessons[2]->duration?> </span>
                                 </div>
                                 <div class="meta-item course-">
                                     <span class="fa fa-user-o"></span>
-                                    <span class="meta-value"> 50 </span>
+                                    <span class="meta-value"> <?=$lessons[2]->student_count?> </span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
                             <div class="author align-items-center">
-                                <img src="/images/a4.jpg" alt="" class="img-fluid rounded-circle">
+                                <img src="<?=$lessons[2]->user->getImage()->getUrl()?>" alt="Teacher image" class="img-fluid rounded-circle">
                                 <ul class="blog-meta">
                                     <li>
-                                        <span class="meta-value mx-1">by</span> <a href="#author"> William</a>
+                                        <span class="meta-value mx-1">by</span> <a href="<?= \yii\helpers\Url::to(['site/teacher-details', 'id' => $lessons[2]->user_id]) ?>"> <?=$lessons[2]->user->getFullName()?></a>
                                     </li>
                                     <li>
-                                        <span class="meta-value mx-1">in</span> <a href="#author"> Programing</a>
+                                        <span class="meta-value mx-1">in</span> <a href="<?= \yii\helpers\Url::to(['site/subjects', 'course_id' => $lessons[2]->subject->course_id]) ?>"> <?=$lessons[2]->subject['name_'.$lang]?></a>
                                     </li>
                                 </ul>
                             </div>
@@ -240,8 +246,7 @@
             </div>
             <div class="mt-5 text-more">
                 <p class="pt-md-3 sample text-center">
-                    Control your personal preference settings to get notified about appropriate courses
-                    <a href="courses.html">View All Courses <span class="pl-2 fa fa-long-arrow-right"></span></a>
+                    <a href="<?=\yii\helpers\Url::to(['courses'])?>"><?=Yii::t('yii','View All Courses')?> <span class="pl-2 fa fa-long-arrow-right"></span></a>
                 </p>
             </div>
         </div>
