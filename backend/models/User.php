@@ -84,7 +84,8 @@ class User extends \yii\db\ActiveRecord
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
             [['email'], 'unique'],
-            [['birthDate'], 'date'],
+            [['birthDate'], 'date', 'format' => 'php:Y-m-d'],
+            [['password_reset_token'], 'default', 'value' => null],
             [['password_reset_token'], 'unique'],
 
             [['image'], 'file', 'extensions' => ['png', 'jpg', 'jpeg']],

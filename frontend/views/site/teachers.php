@@ -21,7 +21,7 @@ $lang = Yii::$app->language;
                                 <div class="card-header p-0 position-relative">
                                     <a href="<?= \yii\helpers\Url::to(['site/teacher-details', 'id' => $teacher->id]) ?>"
                                        class="zoom d-block">
-                                        <img class="card-img-bottom d-block" src="<?= $teacher->getImage()->getUrl() ?>"
+                                        <img class="card-img-bottom d-block" src="<?= $teacher->getImage()->getUrl('268x268') ?>"
                                              alt="Image of Teacher">
                                     </a>
                                     <!--                                    <div class="course-price-badge"> Free</div>-->
