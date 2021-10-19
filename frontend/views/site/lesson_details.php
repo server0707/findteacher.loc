@@ -60,7 +60,7 @@ $lang = Yii::$app->language;
                             href="<?= \yii\helpers\Url::to(['site/teacher_details', 'id' => $lesson->user_id]) ?>"><?= $lesson->user->getFullName() ?></a>
                 </p>
                 <div>
-                    <p><b><?= Yii::t('yii', 'Contacts') ?>:</b>
+                    <p><b><?= (!empty($lesson->user->contactsOfUsers))?Yii::t('yii', 'Contacts').':':'' ?></b>
                     <ul style="margin-left: 30px;">
                         <?php foreach ($lesson->user->contactsOfUsers as $contact) : ?>
                             <li><b><?= $contact->contact->name ?>: </b>

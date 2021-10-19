@@ -155,7 +155,7 @@ class User extends \yii\db\ActiveRecord
 
     public static function getTeachers($status = User::STATUS_ACTIVE)
     {
-        return User::find()->where(['status' => $status, 'role' => 'teacher']);
+        return User::find()->where(['status' => $status, 'role' => 'teacher'])->orderBy('updated_at');
     }
 
     public function getContactType($contact_name)

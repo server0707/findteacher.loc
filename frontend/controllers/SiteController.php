@@ -83,7 +83,8 @@ class SiteController extends AbdullaController
     {
         $this->setMeta(Yii::t('yii', 'Home') . ' - ' . Yii::$app->name);
 
-        return $this->render('index');
+        $lessons = Lesson::find()->where(['status' => Lesson::STATUS_ACTIVE])->orderBy('updated_at')->limit(3)->all();
+        return $this->render('index',compact('lessons'));
     }
 
     /**
@@ -285,7 +286,7 @@ class SiteController extends AbdullaController
 
     public function actionCourses(string $course_name = null)
     {
-        $query = Course::find()->where(['status' => Course::STATUS_ACTIVE]);
+        $query = Course::find()->where(['status' => Course::STATUS_ACTIVE])->orderBy('updated_at');
         $courses_list = $query->all();
         if ($course_name !== null) {
             $query->andWhere(['name_' . Yii::$app->language => $course_name]);
@@ -314,7 +315,7 @@ class SiteController extends AbdullaController
 
         $course_id = $course->id;
         $subjects = new ActiveDataProvider([
-            'query' => Subject::find()->where(['status' => Subject::STATUS_ACTIVE, 'course_id' => $course_id]),
+            'query' => Subject::find()->where(['status' => Subject::STATUS_ACTIVE, 'course_id' => $course_id])->orderBy('updated_at'),
             'pagination' => [
                 'pageSize' => 8,
             ],
@@ -335,7 +336,7 @@ class SiteController extends AbdullaController
 
         $subject_id = $subject->id;
         $lessons = new ActiveDataProvider([
-            'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'subject_id' => $subject_id]),
+            'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'subject_id' => $subject_id])->orderBy('updated_at'),
             'pagination' => [
                 'pageSize' => 8,
             ],
@@ -380,7 +381,7 @@ class SiteController extends AbdullaController
         $this->setMeta(ucfirst($teacher->getFullName()) . ' - ' . Yii::$app->name,$teacher->keywords,$teacher['description_'.Yii::$app->language],Url::base(true).$teacher->getImage()->getUrl(),Url::base(true).Url::to(['site/teacher-details','id'=>$id]));
 
         $lessons = new ActiveDataProvider([
-            'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'user_id' => $id]),
+            'query' => Lesson::find()->where(['status' => Subject::STATUS_ACTIVE, 'user_id' => $id])->orderBy('updated_at'),
             'pagination' => [
                 'pageSize' => 3,
             ],
