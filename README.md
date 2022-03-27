@@ -12,5 +12,6 @@
     <li>common/config/main-local.php faylini oching va "dbname" qiymatini "yii2advanced" dan ozingiz yaratgan ma'lumotlar bazasi nomi(masala: findteacher)ga ozgartiring.</li>
     <li>Terminalda loyiha joylashgan papkaga o'tib, <br><i>yii migrate</i><br>
     buyrug'ini yozing va ENTER ni bosing. Qo'shimcha sorovlar uchun terminalga "yes" ni yozib ENTER ni bosing</li>
+    <li>Terminalda loyiha joylashgan papkaga o'tib, <br><i>yii migrate/up --migrationPath=@vendor/costa-rico/yii2-images/migrations</i><br>buyrug'ini yozing va ENTER ni bosing. Qo'shimcha sorovlar uchun terminalga "yes" ni yozib ENTER ni bosing</li>
     <li>Loyiha ishlashga tayyor!</li>
 </ol>
